@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficioRed - Gestión de Servicios</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>OficioRed</h2>
+        <a href="categorias.html">Categorías</a>
+        <a href="usuarios.html">Usuarios</a>
+        <a href="profesionales.html">Profesionales</a>
+        <a href="servicios.html" class="active">Servicios</a>
+        <a href="transacciones.html">Transacciones</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header-actions">
+            <h1>Gestión de Servicios Ofrecidos</h1>
+            <button class="btn btn-primary" onclick="openModal()">+ Nuevo Servicio</button>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Profesional</th>
+                        <th>Categoría</th>
+                        <th>Precio Base</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Formulario -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="modal-title">Nuevo Servicio</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="servicio-form">
+                <input type="hidden" id="id_servicio_ofrecido">
+                
+                <div class="form-group">
+                    <label for="titulo">Título del Servicio</label>
+                    <input type="text" id="titulo" class="form-control" required placeholder="Ej: Reparación de tuberías">
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="id_profesional">Profesional</label>
+                        <select id="id_profesional" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="id_categoria">Categoría</label>
+                        <select id="id_categoria" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 2;">
+                        <label for="zona_cobertura">Zona de Cobertura</label>
+                        <input type="text" id="zona_cobertura" class="form-control" placeholder="Ej: Centro y alrededores">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="precio_base">Precio Base ($)</label>
+                        <input type="number" step="0.01" id="precio_base" class="form-control" required min="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-control" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar Servicio</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="assets/js/servicios.js"></script>
+</body>
+</html>

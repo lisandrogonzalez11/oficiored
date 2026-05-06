@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficioRed - Gestión de Usuarios</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>OficioRed</h2>
+        <a href="categorias.html">Categorías</a>
+        <a href="usuarios.html" class="active">Usuarios</a>
+        <a href="profesionales.html">Profesionales</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="transacciones.html">Transacciones</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header-actions">
+            <h1>Gestión de Usuarios (Clientes)</h1>
+            <button class="btn btn-primary" onclick="openModal()">+ Nuevo Usuario</button>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre y Apellido</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Registro</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Formulario -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="modal-title">Nuevo Usuario</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="usuario-form">
+                <input type="hidden" id="id_usuario">
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña <small>(Dejar en blanco para no modificar al editar)</small></label>
+                    <input type="password" id="password" class="form-control">
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" id="telefono" class="form-control">
+                    </div>
+                    <div class="form-group" style="flex: 2;">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar Usuario</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="assets/js/usuarios.js"></script>
+</body>
+</html>

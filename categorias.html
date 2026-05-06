@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficioRed - Gestión de Categorías</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>OficioRed</h2>
+        <a href="categorias.html" class="active">Categorías</a>
+        <a href="usuarios.html">Usuarios</a>
+        <a href="profesionales.html">Profesionales</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="transacciones.html">Transacciones</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header-actions">
+            <h1>Gestión de Categorías</h1>
+            <button class="btn btn-primary" onclick="openModal()">+ Nueva Categoría</button>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Filas generadas dinámicamente con JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Formulario -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Nueva Categoría</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="categoria-form">
+                <input type="hidden" id="id_categoria">
+                <div class="form-group">
+                    <label for="nombre">Nombre de la Categoría</label>
+                    <input type="text" id="nombre" class="form-control" required placeholder="Ej: Plomería">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" class="form-control" rows="3" required placeholder="Breve descripción del oficio..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar Categoría</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contenedor para notificaciones -->
+    <div id="toast-container"></div>
+
+    <script src="assets/js/categorias.js"></script>
+</body>
+</html>
