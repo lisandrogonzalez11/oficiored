@@ -1,8 +1,8 @@
 <?php
 // api/config.php
-$host = "localhost";
+$host = "127.0.0.1";
 $username = "root"; // Usuario por defecto de XAMPP
-$password = ""; // Contraseña por defecto de XAMPP (vacía)
+$password = "45169210"; // Contraseña actualizada
 $database = "oficiored"; // Nombre de tu base de datos
 
 // Habilitar reporte de errores de MySQLi

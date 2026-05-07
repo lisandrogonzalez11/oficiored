@@ -103,15 +103,6 @@ switch ($method) {
         if (!empty($data['id_transaccion'])) {
             $id = intval($data['id_transaccion']);
             
-            // Ver si hay pagos o reseñas asociadas
-            $stmt_check = $conn->prepare("SELECT id_pago FROM pagos WHERE id_transaccion = ? UNION SELECT id_reseña FROM reseñas WHERE id_transaccion = ? LIMIT 1");
-            $stmt_check->bind_param("ii", $id, $id);
-            $stmt_check->execute();
-            if ($stmt_check->get_result()->num_rows > 0) {
-                echo json_encode(["status" => "error", "message" => "No se puede eliminar la transacción porque tiene pagos o reseñas asociadas."]);
-                break;
-            }
-
             $stmt = $conn->prepare("DELETE FROM transacciones WHERE id_transaccion = ?");
             $stmt->bind_param("i", $id);
 

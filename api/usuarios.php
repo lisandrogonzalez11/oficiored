@@ -112,12 +112,12 @@ switch ($method) {
         if (!empty($data['id_usuario'])) {
             $id = intval($data['id_usuario']);
             
-            // Verificaciones (p. ej., si tiene transacciones)
-            $stmt_check = $conn->prepare("SELECT id_transaccion FROM transacciones WHERE id_usuario = ? LIMIT 1");
-            $stmt_check->bind_param("i", $id);
+            // Verificaciones: comprobar si tiene transacciones o reseñas
+            $stmt_check = $conn->prepare("SELECT id_transaccion FROM transacciones WHERE id_usuario = ? UNION SELECT id_reseña FROM reseñas WHERE id_usuario = ? LIMIT 1");
+            $stmt_check->bind_param("ii", $id, $id);
             $stmt_check->execute();
             if ($stmt_check->get_result()->num_rows > 0) {
-                echo json_encode(["status" => "error", "message" => "No se puede eliminar el usuario porque tiene transacciones asociadas."]);
+                echo json_encode(["status" => "error", "message" => "No se puede eliminar el usuario porque tiene transacciones o reseñas asociadas."]);
                 break;
             }
 

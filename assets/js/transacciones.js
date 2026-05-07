@@ -179,7 +179,7 @@ async function saveTransaccion() {
 }
 
 async function deleteTransaccion(id) {
-    if (!confirm('¿Estás seguro de que deseas eliminar esta transacción?')) return;
+    if (!confirm('¿Estás seguro de que deseas eliminar esta transacción? Esto también eliminará los pagos y reseñas asociados.')) return;
     
     try {
         const response = await fetch(API_ENDPOINT, {
