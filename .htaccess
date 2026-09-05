@@ -1,0 +1,9 @@
+# =============================================================
+# .htaccess raiz — OficioRed
+# =============================================================
+
+# Prevenir listado de directorios
+Options -Indexes
+
+# Forzar charset UTF-8
+AddDefaultCharset UTF-8

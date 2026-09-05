@@ -1,0 +1,17 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dependencias futuras
+node_modules/
+vendor/
+
+# Config local con credenciales (C3) - NO versionar
+includes/config.local.php
