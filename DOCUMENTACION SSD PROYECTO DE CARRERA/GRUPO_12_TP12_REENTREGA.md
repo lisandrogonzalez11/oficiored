@@ -1,4 +1,4 @@
-# PRÁCTICAS PROFESIONALIZANTES II – TALLER | ETAPA 3  
+﻿# PRÁCTICAS PROFESIONALIZANTES II – TALLER | ETAPA 3  
 ## TP12 – Documentación técnica y preparación de la demostración final  
 ### Reentrega — Ciclo 2026
 
@@ -15,7 +15,7 @@
 | **Integrantes** | Juan Leistmeister · Lisandro · Mirian |
 | **Usuario principal** | Vecino/cliente que busca un profesional de oficios en El Colorado (Formosa) |
 | **Feature / línea funcional trabajada** | Directorio de profesionales de oficios con búsqueda, perfiles públicos, gestión de profesionales y panel de administración |
-| **Versión / rama / commit de referencia** | Rama: `main` · Commit: `7e3b31b73cb04a5269f6fb4fcf0c76de49766284` |
+| **Versión / rama / commit de referencia** | Rama: `main` · Commit: `1d3be3cc4f3dc7af54e2f7d9521138d3df0ada1d` |
 | **Fecha** | 02/10/2026 |
 
 ---
@@ -42,7 +42,7 @@ El prototipo cubre el flujo completo de búsqueda y contacto, el flujo de regist
 |---|---|
 | **Mecanismo de respaldo** | Git (repositorio local) |
 | **Rama** | `main` |
-| **Commit** | `7e3b31b73cb04a5269f6fb4fcf0c76de49766284` |
+| **Commit** | `1d3be3cc4f3dc7af54e2f7d9521138d3df0ada1d` |
 | **Fecha de la versión** | 05/09/2026 |
 | **Motivo por el que se considera estable** | Es el último commit integrado tras la validación funcional de TP11 (pruebas PF-1 a PF-4 aprobadas). Los tres flujos principales fueron verificados en entorno local sin errores críticos. |
 
@@ -202,7 +202,7 @@ La condición `AND p.estado = 'activo'` es obligatoria en todas las consultas p�
 
 | Campo | Valor |
 |---|---|
-| **URL o ubicación del repositorio** | Repositorio local Git en `C:\xampp\htdocs\oficiored` · Rama: `main` · Commit: `7e3b31b` |
+| **URL o ubicación del repositorio** | Repositorio local Git en `C:\xampp\htdocs\oficiored` · Rama: `main` · Commit: `1d3be3c` |
 | **README ubicado en** | Raíz del proyecto (`/README.md`) — **creado** |
 | **Describe qué hace el proyecto** | Sí — el README describe OficioRed, stack, estructura, instalación, configuración, ejecución, versión, estado actual y pendientes |
 | **Incluye instalación/ejecución** | Sí — en el `README.md` y en la Sección 9 de este documento |
@@ -315,7 +315,7 @@ La condición `AND p.estado = 'activo'` es obligatoria en todas las consultas p�
 | Campo | Valor |
 |---|---|
 | **Duración objetivo** | 5 a 7 minutos |
-| **Versión que se demostrará** | Rama `main`, commit `7e3b31b` |
+| **Versión que se demostrará** | Rama `main`, commit `1d3be3c` |
 | **Flujo principal elegido** | Cliente busca un electricista → ve el perfil → Profesional tiene su perfil publicado → Admin aprueba un nuevo perfil |
 | **Datos de prueba preparados** | Al menos 4 profesionales activos con distintas categorías y zonas; 1 profesional en estado `en_revision` para demo de aprobación |
 | **Caso alternativo / validación** | Mostrar que un profesional inactivo no aparece en búsquedas |
@@ -361,7 +361,7 @@ La condición `AND p.estado = 'activo'` es obligatoria en todas las consultas p�
 
 ## 16. Ensayo y verificación previa
 
-- [x] La versión de demo está respaldada (commit `7e3b31b` en rama `main`).
+- [x] La versión de demo está respaldada (commit `1d3be3c` en rama `main`).
 - [x] Servidor y base de datos inician correctamente en XAMPP.
 - [x] El flujo principal fue probado de punta a punta (PF-1 a PF-12).
 - [x] Los datos de prueba están preparados (profesionales activos + 1 en revisión).
@@ -403,7 +403,7 @@ La condición `AND p.estado = 'activo'` es obligatoria en todas las consultas p�
 
 ### Checklist de entrega
 
-- [x] Usamos la versión real y estable del proyecto (commit `7e3b31b`)
+- [x] Usamos la versión real y estable del proyecto (commit `1d3be3c`)
 - [x] No comenzamos una nueva feature durante TP12
 - [x] README.md creado en la raíz
 - [x] Documentamos instalación y ejecución (Sección 9 y README.md)
@@ -480,3 +480,4 @@ La condición `AND p.estado = 'activo'` es obligatoria en todas las consultas p�
 ![E7 — Formulario de solicitud de presupuesto en perfil del profesional](evidencias/E7_presupuesto.png)
 
 *Formulario de solicitud de presupuesto visible en el perfil público de un profesional (vista de cliente sin sesión iniciada). Incluye campos de nombre, teléfono, email opcional, modalidad presencial/digital, zona y descripción del trabajo. Resuelve INC-01.*
+
