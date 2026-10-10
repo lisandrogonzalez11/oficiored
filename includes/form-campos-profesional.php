@@ -54,9 +54,17 @@ $biografia_contador_multilinea = $biografia_contador_multilinea ?? false;
         <!-- PASSWORD -->
         <div class="form-group">
           <label class="form-label" for="password">Contraseña *</label>
-          <input class="form-input <?= isset($errores['password']) ? 'input-error' : '' ?>"
-                 type="password" id="password" name="password"
-                 minlength="8" required>
+          <div class="password-wrap">
+            <input class="form-input <?= isset($errores['password']) ? 'input-error' : '' ?>"
+                   type="password" id="password" name="password"
+                   minlength="8" required>
+            <button type="button" class="password-toggle"
+                    onclick="togglePwd('password', this)"
+                    tabindex="-1" aria-label="Mostrar contraseña">
+              <i data-lucide="eye" class="ico-eye"></i>
+              <i data-lucide="eye-off" class="ico-eye-off" style="display:none"></i>
+            </button>
+          </div>
           <?php if (isset($errores['password'])): ?>
             <span class="form-error"><?= $errores['password'] ?></span>
           <?php endif; ?>
@@ -67,9 +75,17 @@ $biografia_contador_multilinea = $biografia_contador_multilinea ?? false;
           <label class="form-label" for="password_conf">
             Confirmar contraseña *
           </label>
-          <input class="form-input <?= isset($errores['password_conf']) ? 'input-error' : '' ?>"
-                 type="password" id="password_conf" name="password_conf"
-                 minlength="8" required>
+          <div class="password-wrap">
+            <input class="form-input <?= isset($errores['password_conf']) ? 'input-error' : '' ?>"
+                   type="password" id="password_conf" name="password_conf"
+                   minlength="8" required>
+            <button type="button" class="password-toggle"
+                    onclick="togglePwd('password_conf', this)"
+                    tabindex="-1" aria-label="Mostrar contraseña">
+              <i data-lucide="eye" class="ico-eye"></i>
+              <i data-lucide="eye-off" class="ico-eye-off" style="display:none"></i>
+            </button>
+          </div>
           <?php if (isset($errores['password_conf'])): ?>
             <span class="form-error"><?= $errores['password_conf'] ?></span>
           <?php endif; ?>
@@ -95,21 +111,44 @@ $biografia_contador_multilinea = $biografia_contador_multilinea ?? false;
         </div>
 
         <!-- ZONA DE COBERTURA -->
+        <?php
+          $zonas_activas       = $zonas_activas       ?? [];
+          $zonas_seleccionadas = $zonas_seleccionadas ?? [];
+        ?>
         <div class="form-group">
-          <label class="form-label" for="zona_cobertura">
-            Zona de cobertura *
-          </label>
-          <input class="form-input <?= isset($errores['zona_cobertura']) ? 'input-error' : '' ?>"
-                 type="text" id="zona_cobertura" name="zona_cobertura"
-                 value="<?= sanitizar($valores['zona_cobertura']) ?>"
-<?php if ($zona_placeholder !== ''): ?>
-                 placeholder="<?= $zona_placeholder ?>"
-<?php endif; ?>
-                 maxlength="80" required>
-          <?php if (isset($errores['zona_cobertura'])): ?>
-            <span class="form-error"><?= $errores['zona_cobertura'] ?></span>
+          <label class="form-label">Zona de cobertura *</label>
+          <div class="zona-picker <?= isset($errores['zonas']) ? 'zona-picker--error' : '' ?>">
+            <?php foreach ($zonas_activas as $zona): ?>
+              <label class="zona-chip <?= $zona['es_todo'] ? 'zona-chip--todo' : '' ?>">
+                <input type="checkbox" name="zonas[]"
+                       value="<?= (int)$zona['id_zona'] ?>"
+                       <?= in_array((int)$zona['id_zona'], array_map('intval', $zonas_seleccionadas)) ? 'checked' : '' ?>
+                       <?= $zona['es_todo'] ? 'id="zona-todo-check"' : '' ?>>
+                <?= sanitizar($zona['nombre']) ?>
+              </label>
+            <?php endforeach; ?>
+          </div>
+          <?php if (isset($errores['zonas'])): ?>
+            <span class="form-error"><?= $errores['zonas'] ?></span>
           <?php endif; ?>
         </div>
+        <script>
+        (function(){
+          var todo = document.getElementById('zona-todo-check');
+          if (!todo) return;
+          var otros = Array.from(document.querySelectorAll('[name="zonas[]"]:not(#zona-todo-check)'));
+          function aplicarTodo(marcar) {
+            otros.forEach(function(c){ c.checked = marcar; c.disabled = marcar; });
+          }
+          // Estado inicial
+          if (todo.checked) aplicarTodo(true);
+          todo.addEventListener('change', function(){ aplicarTodo(this.checked); });
+          // Si se desmarca uno individualmente, quitar "todo"
+          otros.forEach(function(c){
+            c.addEventListener('change', function(){ if (!this.checked) todo.checked = false; });
+          });
+        })();
+        </script>
 
         <!-- TELEFONO (opcional) -->
         <div class="form-group">
@@ -125,6 +164,20 @@ $biografia_contador_multilinea = $biografia_contador_multilinea ?? false;
             <span class="form-error"><?= $errores['telefono'] ?></span>
           <?php endif; ?>
         </div>
+
+<?php if (!($incluir_password ?? false)): // Solo en editar-perfil, no en registro ?>
+        <!-- INSTAGRAM (opcional, solo edición) -->
+        <div class="form-group">
+          <label class="form-label" for="instagram_url">Instagram (opcional)</label>
+          <div class="instagram-input-wrap">
+            <span class="instagram-prefix">instagram.com/</span>
+            <input class="form-input" type="text" id="instagram_url" name="instagram_url"
+                   value="<?= sanitizar($valores['instagram_url'] ?? '') ?>"
+                   placeholder="tu_usuario" maxlength="100">
+          </div>
+          <span class="texto-secundario" style="font-size:0.8rem;">Solo el nombre de usuario, sin @</span>
+        </div>
+<?php endif; ?>
 
         <!-- BIOGRAFIA (opcional) -->
         <div class="form-group">

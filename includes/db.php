@@ -82,6 +82,9 @@ $opciones = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $opciones);
+    // Sincronizar zona horaria PHP y MySQL (Argentina UTC-3).
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $pdo->exec("SET time_zone = '-03:00'");
 } catch (PDOException $e) {
     error_log('Error de conexión BD: ' . $e->getMessage());
     die('Error de conexión. Intentá más tarde.');

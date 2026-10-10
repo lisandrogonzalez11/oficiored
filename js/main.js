@@ -78,3 +78,13 @@ if (textareaBio && contadorBio) {
 if (window.lucide) {
   lucide.createIcons();
 }
+
+// 7. Mostrar / ocultar contraseña
+function togglePwd(inputId, btn) {
+  var input = document.getElementById(inputId);
+  var isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  btn.querySelector('.ico-eye').style.display     = isHidden ? 'none' : '';
+  btn.querySelector('.ico-eye-off').style.display = isHidden ? '' : 'none';
+  btn.setAttribute('aria-label', isHidden ? 'Ocultar contraseña' : 'Mostrar contraseña');
+}

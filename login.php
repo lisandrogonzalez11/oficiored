@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($error_login === '') {
         $stmt = $pdo->prepare(
-            "SELECT id_profesional, nombre, password
+            "SELECT id_profesional, nombre, password, estado
              FROM profesionales
-             WHERE email = ? AND estado = 'activo'
+             WHERE email = ? AND estado IN ('activo', 'pendiente', 'en_revision')
              LIMIT 1"
         );
         $stmt->execute([$email]);
@@ -53,6 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['profesional_id']     = $fila['id_profesional'];
             $_SESSION['profesional_nombre'] = $fila['nombre'];
+            $_SESSION['profesional_estado'] = $fila['estado'];
+
+            if ($fila['estado'] === 'pendiente') {
+                redirigir('verificar-telefono.php');
+            }
+            if ($fila['estado'] === 'en_revision') {
+                redirigir('dashboard.php');
+            }
+
             $_SESSION['mensaje'] = '¡Bienvenido de vuelta, ' . $fila['nombre'] . '!';
             $_SESSION['mensaje_tipo'] = 'exito';
             redirigir('dashboard.php');
@@ -91,8 +100,16 @@ require_once 'includes/header.php';
         <!-- PASSWORD -->
         <div class="form-group">
           <label class="form-label" for="password">Contraseña</label>
-          <input class="form-input" type="password" id="password"
-                 name="password" required>
+          <div class="password-wrap">
+            <input class="form-input" type="password" id="password"
+                   name="password" required>
+            <button type="button" class="password-toggle"
+                    onclick="togglePwd('password', this)"
+                    tabindex="-1" aria-label="Mostrar contraseña">
+              <i data-lucide="eye" class="ico-eye"></i>
+              <i data-lucide="eye-off" class="ico-eye-off" style="display:none"></i>
+            </button>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -102,6 +119,12 @@ require_once 'includes/header.php';
       </form>
 
       <p style="margin-top: 16px;">
+        <a href="recuperacion.php" style="color: var(--color-primary); font-size: 0.875rem;">
+          ¿Olvidaste tu contraseña?
+        </a>
+      </p>
+
+      <p style="margin-top: 8px;">
         ¿Todavía no tenés perfil?
         <a href="registro.php" style="color: var(--color-primary);">Registrate</a>
       </p>

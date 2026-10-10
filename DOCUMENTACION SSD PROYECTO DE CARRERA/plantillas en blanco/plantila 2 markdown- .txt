@@ -1,0 +1,29 @@
+Actividad
+Objetivo: Aplicar las dos primeras fases del SDD para resolver un problema sociocomunitario con uso de soluciones de software de El Colorado o la región. Modalidad: Trabajo colaborativo en equipos.
+
+ Consigna para los alumnos:
+
+ Identificación del Problema (Etapa I): Como equipo, identifiquen una necesidad real en nuestra comunidad. Pueden utilizar lo enviado en la actividad anterior de base. Formulen el problema claramente. 
+
+ Redacción de la Constitución (SDD Fase 1): Creen un documento (archivo Markdown) donde establezcan las reglas de su equipo. Deben incluir: 
+
+Stack tecnológico a utilizar.
+
+Convenciones de código y trabajo.
+
+Reglas no negociables (ej. "Todo código debe tener testing").
+
+ Redacción de la Especificación (SDD Fase 2 / Etapa II): En el mismo documento, detallen qué van a construir. 
+
+¿Qué problema exacto resuelve?. 
+
+¿Para quién está dirigido? (Sus usuarios) . 
+
+Relevamiento inicial: Definan al menos 3 requerimientos funcionales principales (features) y 2 no funcionales.
+
+ 
+
+ANTES DE ENVIAR
+
+Colocar en el box de texto el número de grupo al que pertenecen y sus integrantes.
+Entregar el documento Markdown como adjunto a esta actividad con la nomenclatura: GRUPO_X_SDD.MD

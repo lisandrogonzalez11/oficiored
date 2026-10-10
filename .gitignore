@@ -15,3 +15,10 @@ vendor/
 
 # Config local con credenciales (C3) - NO versionar
 includes/config.local.php
+
+# Backups de base de datos - NO versionar
+backups/
+
+# Fotos de perfil subidas por usuarios - NO versionar; .htaccess sí se versiona
+uploads/fotos/*
+!uploads/fotos/.htaccess

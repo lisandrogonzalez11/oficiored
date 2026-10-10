@@ -4,7 +4,7 @@
     <div class="container footer__inner">
 
       <div class="footer__brand">
-        <img src="assets/img/logo.svg" alt="OficioRed" width="28" height="28">
+        <img src="assets/img/logo.png" alt="OficioRed" width="28" height="28" class="footer__logo-img">
         <span>OficioRed</span>
       </div>
 

@@ -6,6 +6,7 @@
 
 require_once 'includes/db.php';
 require_once 'includes/funciones.php';
+require_once 'lib/EmailOTP.php';
 
 iniciar_sesion();
 
@@ -17,7 +18,8 @@ if (esta_logueado()) {
 // Token CSRF.
 csrf_token();
 
-$errores = [];
+$errores             = [];
+$zonas_seleccionadas = [];
 $valores = [
     'nombre'         => '',
     'apellido'       => '',
@@ -28,8 +30,9 @@ $valores = [
     'biografia'      => '',
 ];
 
-// Categorias para el select de oficio.
-$categorias = obtener_categorias($pdo);
+// Categorias y zonas para el formulario.
+$categorias    = obtener_categorias($pdo);
+$zonas_activas = obtener_zonas($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -51,6 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valores = compact('nombre', 'apellido', 'email', 'telefono',
                        'oficio', 'zona_cobertura', 'biografia');
 
+    // Zonas seleccionadas (para repintar en caso de error)
+    $zonas_seleccionadas = array_map('intval',
+        array_filter($_POST['zonas'] ?? [], fn($v) => (int)$v > 0)
+    );
+
     // Validaciones server-side (centralizadas en funciones.php).
     $errores = validar_datos_profesional($pdo, [
         'nombre'         => $nombre,
@@ -59,36 +67,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'password'       => $password,
         'password_conf'  => $password_conf,
         'oficio'         => $oficio,
-        'zona_cobertura' => $zona_cobertura,
+        'zona_cobertura' => '',
         'biografia'      => $biografia,
         'telefono'       => $telefono,
     ], ['validar_password' => true]);
+
+    if (empty($zonas_seleccionadas)) {
+        $errores['zonas'] = 'Seleccioná al menos una zona de cobertura.';
+    }
 
     // Sin errores: crear la cuenta.
     if (empty($errores)) {
         $hash = password_hash($password, PASSWORD_BCRYPT);
 
+        // Resolver categoria_id a partir del nombre de oficio seleccionado.
+        $categoria_id = null;
+        foreach ($categorias as $cat) {
+            if ($cat['nombre'] === $oficio) {
+                $categoria_id = (int) $cat['id_categoria'];
+                break;
+            }
+        }
+
         $stmt = $pdo->prepare(
             "INSERT INTO profesionales
                 (nombre, apellido, email, password, telefono,
-                 biografia, oficio, zona_cobertura)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                 biografia, oficio, zona_cobertura, categoria_id, estado)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')"
         );
         $stmt->execute([
             $nombre, $apellido, $email, $hash, $telefono,
-            $biografia, $oficio, $zona_cobertura,
+            $biografia, $oficio, $zona_cobertura, $categoria_id,
         ]);
 
-        $nuevo_id = $pdo->lastInsertId();
+        $nuevo_id = (int) $pdo->lastInsertId();
+
+        // Guardar zonas en la tabla pivot y actualizar texto zona_cobertura.
+        $texto_zona = guardar_zonas_profesional($pdo, $nuevo_id, $zonas_seleccionadas);
+        $pdo->prepare("UPDATE profesionales SET zona_cobertura = ? WHERE id_profesional = ?")
+            ->execute([$texto_zona, $nuevo_id]);
+
+        // Generar y enviar OTP por email.
+        $codigo = EmailOTP::generarCodigo();
+        EmailOTP::guardarOTP($pdo, $nuevo_id, $codigo);
+        EmailOTP::enviarCodigo($email, $nombre, $codigo);
 
         session_regenerate_id(true);
         $_SESSION['profesional_id']     = $nuevo_id;
         $_SESSION['profesional_nombre'] = $nombre;
+        $_SESSION['profesional_estado'] = 'pendiente';
+        $_SESSION['otp_ultimo_envio']   = time();
 
-        $_SESSION['mensaje'] = '¡Bienvenido a OficioRed, ' . $nombre . '! Tu perfil ya está activo.';
-        $_SESSION['mensaje_tipo'] = 'exito';
-
-        redirigir('dashboard.php');
+        redirigir('verificar-telefono.php');
     }
 }
 

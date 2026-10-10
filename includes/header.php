@@ -12,6 +12,7 @@ if (!isset($titulo_pagina)) {
 }
 
 $logueado = esta_logueado();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,6 +21,10 @@ $logueado = esta_logueado();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="OficioRed — Encontrá profesionales de oficio confiables en El Colorado, Formosa">
   <title><?= htmlspecialchars($titulo_pagina) ?> | OficioRed</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
 
   <!-- Open Graph -->
   <meta property="og:title" content="OficioRed">
@@ -44,7 +49,7 @@ $logueado = esta_logueado();
     <div class="container header__inner">
 
       <a href="index.php" class="header__logo">
-        <img src="assets/img/logo.svg" alt="OficioRed" width="32" height="32">
+        <img src="assets/img/logo-rojo.png" alt="OficioRed" width="36" height="36" class="header__logo-img">
         <span>OficioRed</span>
       </a>
 
@@ -68,6 +73,27 @@ $logueado = esta_logueado();
       </nav>
     </div>
   </header>
+
+  <!-- Barra de categorías (opcional, se activa con $mostrar_cats_nav = true) -->
+  <?php if (!empty($mostrar_cats_nav)): ?>
+  <?php
+    $cats_nav = function_exists('obtener_categorias') ? obtener_categorias($pdo) : [];
+  ?>
+  <?php if (!empty($cats_nav)): ?>
+  <nav class="cats-nav" aria-label="Categorías de oficio">
+    <div class="cats-nav__inner container">
+      <?php foreach ($cats_nav as $cn): ?>
+        <?php $chip_activo = isset($cat) && $cat === (int)$cn['id_categoria'] ? ' cats-nav__chip--activo' : ''; ?>
+        <a href="buscar.php?cat=<?= (int)$cn['id_categoria'] ?>"
+           class="cats-nav__chip<?= $chip_activo ?>">
+          <i data-lucide="<?= sanitizar($cn['icono_lucide']) ?>"></i>
+          <?= sanitizar($cn['nombre']) ?>
+        </a>
+      <?php endforeach; ?>
+    </div>
+  </nav>
+  <?php endif; ?>
+  <?php endif; ?>
 
   <!-- Mensaje flash (si existe) -->
   <?php if (!empty($_SESSION['mensaje'])): ?>

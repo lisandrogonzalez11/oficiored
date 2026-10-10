@@ -1,0 +1,461 @@
+Devolución  – Primera entrega
+Grupo 12
+Proyecto: OficioRed
+Actividad: TP12 – Documentación técnica y preparación de la demostración final
+
+1. Identificación del proyecto — Correcta
+La portada identifica:
+
+proyecto;
+institución;
+grupo;
+integrantes;
+período;
+versión;
+metodología.
+ 
+
+Además, ahora figura correctamente como Grupo 12, resolviendo la inconsistencia de numeración que había aparecido en una entrega anterior.
+
+2. Resumen ejecutivo — Muy bien resuelto
+La descripción permite comprender rápidamente qué problema aborda OficioRed y qué actores participan:
+
+vecinos;
+profesionales;
+administradores.
+También se describe correctamente que el sistema permite buscar profesionales sin registro, publicar perfiles y administrar categorías/perfiles. GRUPO_12_TP12_2
+
+El stack queda claramente establecido:
+
+PHP 8 + MySQL/MariaDB + HTML/CSS/JS vanilla + PDO + Apache/XAMPP. 
+
+Muy buen punto de partida.
+
+3. Estructura del proyecto — Excelente nivel de detalle
+La entrega incluye un árbol de archivos real con:
+
+frontend público;
+autenticación;
+dashboard;
+administración;
+includes;
+scripts;
+SQL;
+uploads;
+documentación arquitectónica.
+ 
+
+Y luego explica la responsabilidad de los archivos principales. 
+
+Esto cumple muy bien el objetivo de una carpeta técnica: permite entender cómo está organizado el sistema sin tener que inspeccionar todo el código.
+
+4. Arquitectura y flujo — Correctos
+Se explica que el sistema utiliza una arquitectura PHP monolítica basada en páginas, sin routing centralizado ni MVC. 
+
+El flujo de búsqueda está detallado de punta a punta:
+
+usuario → index.php → GET → buscar.php → PDO → MySQL → card-profesional.php → navegador.
+
+ 
+
+También documentan correctamente los flujos de autenticación profesional y administrativa. 
+
+Este apartado está muy bien logrado.
+
+5. Modelo de datos — Muy completo
+La documentación describe:
+
+categorias;
+profesionales;
+usuarios;
+servicios;
+con tipos, claves, relaciones y restricciones. 
+
+También incluye la consulta principal utilizada en el buscador y deja explícito que:
+
+AND p.estado = 'activo'
+
+es obligatorio en las consultas públicas. 
+
+Esto supera ampliamente el mínimo esperado para este apartado.
+
+6. Estado de funcionalidades — Muy bien trabajado
+La sección E permite distinguir claramente qué está implementado y qué queda pendiente.
+
+Entre las funcionalidades implementadas aparecen:
+
+búsqueda;
+filtros;
+perfil público;
+registro;
+login;
+dashboard;
+edición de perfil;
+foto;
+servicios;
+panel admin;
+categorías.
+ 
+
+Y quedan como pendientes, entre otros:
+
+deploy;
+reseñas;
+recuperación de contraseña;
+paginación;
+formulario de contacto.
+ 
+
+Muy buena transparencia sobre el estado real.
+
+Primer punto importante a corregir
+7. Falta diferenciar explícitamente MVP original, prototipo actual y brecha
+La plantilla TP12 que entregamos pide expresamente tres elementos:
+
+MVP/PMF original
+Prototipo implementado hasta TP12
+Brecha actual
+
+En este documento encontramos muy bien documentado el estado actual, pero no aparece reconstruido claramente el MVP original definido en TP3.
+
+El grupo debe agregar una sección breve que diga, por ejemplo:
+
+MVP/PMF original
+Qué funcionalidades se habían definido como mínimas inicialmente.
+
+Prototipo actual
+Qué funcionalidades están realmente implementadas hoy.
+
+Brecha
+Qué funcionalidades esenciales del MVP original todavía faltan o están incompletas.
+
+Esto es importante porque la próxima actividad utilizará justamente esa brecha para preparar el MVP integral del coloquio.
+
+No alcanza con una lista de pendientes técnicos; necesitamos saber cuáles eran parte del MVP original y cuáles pertenecen a una futura versión.
+
+8. Decisiones técnicas — Muy buena sección
+El documento reconstruye decisiones reales:
+
+zona → zona_cobertura;
+MySQLi → PDO;
+partial de tarjeta;
+HTML server-side vs JSON;
+categorías;
+usuarios para admin;
+fotos;
+sesiones.
+ 
+
+Este apartado tiene muy buen valor académico porque muestra que el sistema no fue solamente “programado”, sino diseñado mediante decisiones justificadas.
+
+9. Uso de IA — Muy bien documentado
+El grupo declara el uso de Claude en distintas etapas y relaciona cada intervención con una actividad concreta:
+
+esquema inicial;
+correcciones;
+PDO;
+refactorización;
+integración;
+pruebas;
+nuevas funcionalidades;
+documentación.
+ 
+
+Además, deja claro que las propuestas fueron revisadas y verificadas. 
+
+Muy buen uso crítico de IA.
+
+Segundo punto importante
+10. Falta una trazabilidad TP3 → TP11 explícita
+Aunque el documento menciona varios TP dentro de las decisiones y del registro de IA, no existe una sección que reconstruya sistemáticamente:
+
+TP3 → TP4 → TP5 → TP6 → TP7 → TP8 → TP9 → TP10 → TP11
+
+con:
+
+qué produjo cada TP;
+qué decisión se conserva;
+qué evidencia o componente actual deriva de él.
+Eso era un requisito específico de la plantilla TP12.
+
+No necesitan desarrollar páginas adicionales extensas.
+
+Una tabla de nueve filas sería suficiente:
+
+TP | producto/decisión | qué se conserva hoy | referencia
+
+Este punto debe agregarse.
+
+11. Pruebas — Muy completas
+El documento recupera correctamente PF-1 a PF-4 de TP11. 
+
+Y agrega una batería posterior muy interesante sobre:
+
+seguridad del script admin;
+validación de contraseña;
+email;
+rate limiting;
+profesional inactivo;
+perfiles públicos;
+categorías;
+sesiones.
+ 
+
+Esto es una fortaleza importante.
+
+Tercer punto a corregir
+12. Faltan evidencias visuales reales de funcionamiento
+El documento describe muy bien las pruebas, pero la carpeta técnica debería ser autocontenida.
+
+Actualmente predominan:
+
+tablas;
+código;
+descripciones.
+Sería conveniente incorporar un pequeño anexo de evidencias reales:
+
+página de inicio;
+búsqueda válida;
+perfil;
+panel profesional;
+panel admin;
+persistencia o estado de BD;
+validación relevante.
+No hacen falta veinte capturas.
+
+Con 5 o 6 evidencias seleccionadas y una oración explicativa por cada una alcanza.
+
+El objetivo es que alguien pueda abrir esta carpeta y constatar visualmente el sistema sin tener que recuperar TP11.
+
+13. Pendientes — Correctamente documentados
+Los pendientes se identifican con prioridad y estado. 
+
+Especialmente correcto es reconocer que:
+
+deploy;
+paginación;
+recuperación de contraseña;
+reseñas;
+formulario de contacto
+no impiden necesariamente documentar el estado actual.
+
+Pero, nuevamente, en la reentrega deberían identificar cuáles pertenecen:
+
+al MVP esencial
+
+y cuáles pueden pasar a:
+
+versión 2 / evolución futura.
+
+14. Instalación y ejecución — Excelente
+La guía permite reconstruir el entorno:
+
+copiar proyecto;
+iniciar XAMPP;
+importar SQL;
+configurar conexión PDO;
+crear administrador;
+acceder al sistema.
+Y luego se proporcionan las rutas principales de acceso. 
+
+Muy bien resuelto.
+
+Cuarto punto importante
+15. Falta identificar una versión estable mediante Git
+La portada indica:
+
+“Post-TP11 actualizada (v2)”.
+
+ 
+
+Pero para TP12 necesitamos una referencia técnica reproducible:
+
+rama;
+commit;
+tag o copia;
+repositorio.
+Por ejemplo:
+
+Rama: main
+Commit: abc123...
+Repositorio: [...]
+Fecha: [...]
+
+Esto es importante porque:
+
+la carpeta técnica y la demo deben referirse al mismo código.
+
+Sin esa referencia exacta, “v2” es demasiado genérico.
+
+16. README — No queda suficientemente documentado
+El documento funciona en la práctica como una excelente documentación técnica, pero no se identifica claramente:
+
+si existe README.md;
+dónde está;
+qué contiene;
+si está actualizado.
+La plantilla TP12 lo pide expresamente.
+
+Para la segunda entrega deben indicar:
+
+README: existe / no existe
+ubicación: [...]
+estado: actualizado / pendiente.
+
+Si no existe todavía, deberían crear uno básico utilizando como base la excelente sección de instalación que ya tienen.
+
+17. Guion de demo — Está muy bien elaborado
+El guion tiene estructura narrativa:
+
+problema;
+stack;
+búsqueda;
+categorías;
+validaciones;
+panel profesional;
+administración;
+cierre.
+ 
+
+Esto es una gran fortaleza.
+
+Además, las notas para el presentador muestran preparación real. 
+
+Pero hay que corregir dos aspectos de la demo
+18. Duración: 7–10 minutos vs. 5–7 minutos
+La plantilla oficial del TP12 establecía una duración objetivo de:
+
+5 a 7 minutos
+El grupo propone:
+
+7 a 10 minutos.
+ 
+
+Para esta actividad deben ajustar el guion a 5–7 minutos.
+
+No necesitan eliminar funcionalidad: pueden acortar explicaciones y seleccionar los momentos más representativos.
+
+19. Faltan responsables por bloque
+El guion dice qué mostrar, pero no quién lo hace.
+
+Al ser tres integrantes, deberían distribuir:
+
+quién presenta;
+quién opera;
+quién explica arquitectura/decisiones;
+quién realiza el cierre.
+No hace falta repartir matemáticamente cada minuto, pero sí definir roles.
+
+20. Falta un plan de contingencia formal
+Las notas indican:
+
+tener XAMPP iniciado;
+phpMyAdmin abierto;
+código disponible.
+ 
+
+Eso está bien, pero no constituye todavía un plan B.
+
+Deberían agregar:
+
+Si falla XAMPP: copia/restauración rápida o segundo equipo.
+Si falla la BD: backup preparado.
+Si falla la demo: video corto del flujo.
+Si falla el equipo: capturas esenciales.
+
+No hace falta complicarlo.
+
+21. Hay un detalle conceptual sobre el alcance
+La descripción inicial afirma que el sistema permite muchas funcionalidades:
+
+registro;
+gestión del perfil;
+administración;
+servicios.
+ 
+
+Eso ahora sí está respaldado por la extensa tabla de funcionalidades.
+
+Pero necesitamos saber si todo eso pertenece realmente al MVP original o si parte fue incorporado posteriormente como “Fase 2”.
+
+El documento menciona reiteradamente:
+
+Fase 2
+
+por ejemplo en decisiones, IA y pruebas. 
+
+Por eso la sección de MVP original vs. evolución posterior es especialmente necesaria en este grupo.
+
+Fortalezas de la entrega
+Excelente nivel técnico.
+Proyecto claramente identificado.
+Arquitectura real documentada.
+Árbol de archivos detallado.
+Responsabilidades de componentes.
+Modelo de datos completo.
+SQL relevante.
+Estado de funcionalidades.
+Decisiones arquitectónicas.
+Uso crítico de IA.
+Pruebas TP11.
+Pruebas adicionales.
+Pendientes reales.
+Instalación reproducible.
+Seguridad correctamente considerada.
+Guion de demostración completo.
+Estado real del proyecto bien documentado.
+Determinación académica
+La primera entrega requiere REENTREGA MÍNIMA.
+
+No deben reconstruir el documento. La base técnica es muy buena.
+
+Para la segunda entrega deben completar únicamente
+Incorporar una sección:
+MVP original / prototipo actual / brecha actual.
+Identificar qué pendientes son:
+esenciales para el MVP;
+versión 2 / evolución futura.
+Agregar la trazabilidad explícita TP3–TP11.
+Registrar:
+repositorio;
+rama;
+commit/tag/copia exacta.
+Indicar el estado y ubicación del README.
+Incorporar aproximadamente 5–6 evidencias visuales reales del sistema.
+Ajustar el guion de demo de 7–10 min → 5–7 min.
+Asignar responsables entre Juan, Lisandro y Mirian.
+Incorporar un plan de contingencia breve.
+Mantener el resto del documento porque está correctamente desarrollado.
+No deben hacer ahora
+No necesitan para aprobar TP12:
+
+deployar el sistema;
+implementar paginación;
+implementar reseñas;
+implementar recuperación de contraseña;
+implementar contacto web;
+desarrollar una nueva feature.
+Eso se decidirá después al analizar qué brechas son realmente indispensables para el MVP integral del coloquio.
+
+Síntesis
+Documentación técnica: muy buena.
+Arquitectura: muy buena.
+Modelo de datos: completo.
+Funcionalidades: claramente registradas.
+Pruebas: muy completas.
+IA: correctamente documentada.
+Instalación: completa.
+Guion: muy bueno.
+
+Falta cerrar:
+
+MVP original vs. actual: pendiente.
+Brecha: pendiente explícita.
+Trazabilidad TP3–TP11: pendiente formal.
+commit/repositorio: pendiente.
+README: pendiente de identificar.
+evidencias visuales: insuficientes en esta carpeta.
+demo 5–7 min: debe ajustarse.
+roles y contingencia: deben completarse.
+
+REENTREGA MÍNIMA. El Grupo 12 tiene una carpeta técnica muy sólida; necesita completar estos elementos formales para que TP12 pueda considerarse cerrado y utilizarse como base del posterior cierre funcional integral del MVP para el coloquio.

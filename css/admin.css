@@ -1,0 +1,606 @@
+/* ================================================================
+   admin.css — Estilos del panel de administración de OficioRed
+   Complementa css/estilos.css (mismas variables CSS).
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   Layout admin
+   ---------------------------------------------------------------- */
+.admin-body { background: #f1f5f9; }
+
+/* ----------------------------------------------------------------
+   Header admin
+   ---------------------------------------------------------------- */
+.admin-header {
+  background: #1e293b;
+  color: #e2e8f0;
+  position: sticky; top: 0; z-index: 100;
+}
+.admin-header__inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex; align-items: center; gap: 1rem;
+  height: 54px;
+}
+.admin-header__brand {
+  display: flex; align-items: center; gap: 0.45rem;
+  font-weight: 700; font-size: 0.95rem; color: #f1f5f9;
+  white-space: nowrap; flex-shrink: 0;
+}
+.admin-header__brand svg { width: 17px; height: 17px; color: var(--color-accent); }
+.admin-logo-img { width: 28px; height: 28px; object-fit: contain; filter: invert(1) brightness(2); }
+
+/* ---- Nav ---- */
+.admin-nav {
+  display: flex; align-items: center; gap: 0.2rem;
+  margin-left: auto;
+}
+.admin-nav__link {
+  display: flex; align-items: center; gap: 0.38rem;
+  padding: 0.38rem 0.7rem; border-radius: var(--radius-sm);
+  color: #94a3b8; font-size: 0.85rem; font-weight: 500;
+  text-decoration: none;
+  transition: background 0.14s, color 0.14s;
+  white-space: nowrap;
+}
+.admin-nav__link svg { width: 14px; height: 14px; }
+.admin-nav__link:hover { background: rgba(255,255,255,0.09); color: #e2e8f0; }
+.admin-nav__link--activo { background: rgba(255,255,255,0.14); color: #fff; font-weight: 600; }
+.admin-nav__link--logout { color: #fca5a5; border-left: 1px solid #334155; margin-left: 0.35rem; padding-left: 0.9rem; }
+.admin-nav__link--logout:hover { background: rgba(239,68,68,0.18); color: #fca5a5; }
+
+/* hamburger (mobile) */
+.admin-nav__toggle {
+  display: none; background: none; border: none; cursor: pointer;
+  color: #e2e8f0; padding: 0.3rem; margin-left: auto;
+}
+.admin-nav__toggle svg { width: 22px; height: 22px; }
+
+@media (max-width: 768px) {
+  .admin-nav__toggle { display: flex; align-items: center; }
+  .admin-nav {
+    display: none;
+    position: absolute; top: 54px; left: 0; right: 0;
+    background: #1e293b; flex-direction: column; align-items: stretch;
+    padding: 0.5rem 1rem 1rem; gap: 0.2rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,.35);
+    z-index: 99;
+  }
+  .admin-nav--open { display: flex; }
+  .admin-header { position: relative; }
+  .admin-nav__link--logout { border-left: none; margin-left: 0; padding-left: 0.7rem; border-top: 1px solid #334155; margin-top: 0.25rem; padding-top: 0.6rem; }
+}
+
+/* ----------------------------------------------------------------
+   Main
+   ---------------------------------------------------------------- */
+.admin-main { padding: 2rem 0; min-height: calc(100vh - 54px); }
+.admin-container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* ----------------------------------------------------------------
+   Page header
+   ---------------------------------------------------------------- */
+.admin-page-header {
+  display: flex; align-items: baseline; gap: 1rem;
+  flex-wrap: wrap; margin-bottom: 1.75rem;
+}
+.admin-page-header h1 { font-size: 1.45rem; font-weight: 700; color: var(--color-text); }
+.admin-page-header a { font-size: 0.875rem; color: var(--color-text-light); text-decoration: none; }
+.admin-page-header a:hover { text-decoration: underline; }
+
+/* ----------------------------------------------------------------
+   Dashboard — contadores
+   ---------------------------------------------------------------- */
+.admin-contadores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; margin-bottom: 1.75rem;
+}
+@media (min-width: 640px) {
+  .admin-contadores { grid-template-columns: repeat(4, 1fr); }
+}
+.admin-contador {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.2rem;
+  display: flex; align-items: center; gap: 0.9rem;
+  box-shadow: var(--shadow-card);
+}
+.admin-contador svg { width: 26px; height: 26px; color: var(--color-text-light); flex-shrink: 0; }
+.admin-contador strong { display: block; font-size: 1.7rem; font-weight: 700; line-height: 1.1; color: var(--color-text); }
+.admin-contador span { font-size: 0.78rem; color: var(--color-text-light); font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; }
+.admin-contador--activo svg { color: var(--color-success); }
+.admin-contador--inactivo svg { color: var(--color-accent); }
+
+/* ----------------------------------------------------------------
+   Dashboard — accesos rápidos
+   ---------------------------------------------------------------- */
+.admin-accesos-rapidos { display: flex; gap: 1rem; flex-wrap: wrap; }
+.admin-acceso {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 0.85rem 1.2rem;
+  text-decoration: none; color: var(--color-text); font-weight: 600; font-size: 0.9rem;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.admin-acceso svg { width: 18px; height: 18px; color: var(--color-primary); }
+.admin-acceso:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+
+/* ----------------------------------------------------------------
+   Card admin genérica
+   ---------------------------------------------------------------- */
+.admin-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 1.5rem;
+  box-shadow: var(--shadow-card); margin-bottom: 1.5rem;
+}
+.admin-card h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; }
+
+/* ----------------------------------------------------------------
+   Tabla admin
+   ---------------------------------------------------------------- */
+.admin-tabla-wrap { overflow-x: auto; }
+.admin-tabla {
+  width: 100%; border-collapse: collapse; font-size: 0.875rem;
+}
+.admin-tabla th, .admin-tabla td {
+  text-align: left; padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--color-border); vertical-align: middle;
+}
+.admin-tabla th {
+  font-weight: 600; color: var(--color-text-light);
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+  background: var(--color-bg); white-space: nowrap;
+}
+.admin-tabla tr:last-child td { border-bottom: none; }
+.admin-tabla tbody tr:hover td { background: var(--color-primary-light); }
+
+/* ----------------------------------------------------------------
+   Acciones en tabla
+   ---------------------------------------------------------------- */
+.admin-acciones { display: flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap; }
+
+/* ----------------------------------------------------------------
+   Badges de estado
+   ---------------------------------------------------------------- */
+.badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; }
+.badge-activo   { background: var(--color-success-bg); color: var(--color-success); }
+.badge-inactivo { background: #fef3c7; color: #92400e; }
+
+/* ----------------------------------------------------------------
+   Formulario inline (categorías)
+   ---------------------------------------------------------------- */
+.admin-form-inline {
+  display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap;
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 1rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+.admin-form-inline h3 { width: 100%; font-size: 0.95rem; margin-bottom: 0.25rem; }
+.admin-form-inline .fg { flex: 1 1 180px; }
+.admin-form-inline label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--color-text-light); margin-bottom: 0.28rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.admin-form-inline input {
+  width: 100%; padding: 0.45rem 0.7rem; border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); font-size: 0.875rem; font-family: var(--font-base);
+  background: var(--color-surface); color: var(--color-text);
+}
+.admin-form-inline input:focus { outline: none; border-color: var(--color-primary); }
+
+/* ----------------------------------------------------------------
+   Detalle de profesional
+   ---------------------------------------------------------------- */
+.admin-prof-header {
+  display: flex; align-items: center; gap: 1.25rem;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.admin-prof-avatar {
+  width: 68px; height: 68px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white; font-size: 1.45rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.admin-prof-foto {
+  width: 68px; height: 68px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--color-border); flex-shrink: 0;
+}
+.admin-prof-info h2 { font-size: 1.2rem; font-weight: 700; }
+.admin-prof-info p { font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.2rem; }
+
+.admin-detalle-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 2rem; margin-bottom: 1.25rem;
+}
+@media (max-width: 600px) { .admin-detalle-grid { grid-template-columns: 1fr; } }
+.admin-detalle-item {}
+.admin-detalle-item label {
+  display: block; font-size: 0.72rem; font-weight: 600;
+  color: var(--color-text-light); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 0.15rem;
+}
+.admin-detalle-item span { font-size: 0.9rem; font-weight: 500; color: var(--color-text); }
+
+/* Servicios list */
+.admin-servicios-lista {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;
+}
+.admin-servicio-chip {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.3rem 0.7rem; border-radius: var(--radius-full);
+  font-size: 0.8rem; font-weight: 500;
+}
+.admin-servicio-chip--activo   { background: var(--color-success-bg); color: var(--color-success); }
+.admin-servicio-chip--inactivo { background: var(--color-border); color: var(--color-text-light); }
+.admin-servicio-chip svg { width: 12px; height: 12px; }
+
+/* ----------------------------------------------------------------
+   Login admin
+   ---------------------------------------------------------------- */
+.admin-login-body {
+  background: #0f172a; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-base); padding: 1rem;
+}
+.admin-login-card {
+  background: #1e293b; border: 1px solid #334155;
+  border-radius: var(--radius-lg); padding: 2.25rem;
+  width: 100%; max-width: 390px; color: #e2e8f0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.admin-login-card h1 {
+  font-size: 1.2rem; font-weight: 700; margin-bottom: 0.2rem;
+  color: #f1f5f9; display: flex; align-items: center; gap: 0.45rem;
+}
+.admin-login-card h1 svg { width: 18px; height: 18px; color: var(--color-accent); }
+.admin-login-card h1 img { filter: invert(1) brightness(2); }
+.admin-login-card .subtitulo { font-size: 0.82rem; color: #64748b; margin-bottom: 1.75rem; }
+.admin-login-card .form-label { color: #94a3b8; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.admin-login-card .form-input {
+  background: #0f172a; border-color: #334155; color: #f1f5f9;
+  transition: border-color 0.15s;
+}
+.admin-login-card .form-input:focus { border-color: var(--color-accent); outline: none; box-shadow: none; }
+.admin-login-card .alerta { margin-bottom: 1rem; font-size: 0.85rem; }
+.admin-login-card .btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
+.password-wrap { position: relative; }
+.password-wrap .form-input { padding-right: 2.6rem; }
+.password-toggle { position: absolute; right: 0.65rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--color-text-light, #94a3b8); padding: 0.2rem; display: flex; align-items: center; }
+.password-toggle:hover { color: var(--color-text, #f1f5f9); }
+.password-toggle svg { width: 18px; height: 18px; }
+
+/* Botón deshabilitado en tabla */
+button:disabled, .btn:disabled {
+  opacity: 0.45; cursor: not-allowed;
+}
+
+/* Alerta de acción pendiente en dashboard admin */
+.admin-alerta-accion {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: #fff8e1; border: 1px solid #ffc107; border-radius: 8px;
+  padding: 14px 18px; margin-bottom: 20px; color: #6d4c00; font-size: 0.9rem;
+}
+.admin-alerta-accion svg { width: 20px; height: 20px; flex-shrink: 0; }
+.admin-alerta-accion span { flex: 1; }
+
+/* Badge de conteo en acceso rápido */
+.admin-acceso { position: relative; }
+.admin-badge-count {
+  position: absolute; top: -8px; right: -8px;
+  background: var(--color-primary); color: #fff;
+  font-size: 0.7rem; font-weight: 700;
+  border-radius: 50%; min-width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px;
+}
+
+/* Badge en_revision y pendiente */
+.badge-en_revision { background:#fff8e1; color:#6d4c00; border:1px solid #ffc107; }
+.badge-pendiente   { background:#f3e5f5; color:#6a1b9a; border:1px solid #ce93d8; }
+.admin-contador--alerta { border-left:3px solid var(--color-accent); }
+
+/* Chips de servicio en admin detalle */
+.admin-servicio-chip { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:20px; font-size:0.8rem; }
+.admin-servicio-chip--activo   { background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; }
+.admin-servicio-chip--inactivo { background:#f5f5f5; color:#9e9e9e; border:1px solid #e0e0e0; }
+.admin-servicios-lista { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+
+/* ----------------------------------------------------------------
+   Filtros avanzados en profesionales
+   ---------------------------------------------------------------- */
+.prof-filtros-bar {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+.prof-filtros-inputs {
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+}
+.prof-filtros-campo { flex: 1 1 180px; }
+.prof-filtros-input {
+  width: 100%; padding: 0.45rem 0.7rem;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  font-size: 0.875rem; font-family: var(--font-base);
+  background: var(--color-bg); color: var(--color-text);
+}
+.prof-filtros-input:focus { outline: none; border-color: var(--color-primary); }
+
+/* ----------------------------------------------------------------
+   Barra de acciones masivas (bulk bar)
+   ---------------------------------------------------------------- */
+.bulk-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: #1e293b; color: #e2e8f0;
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding: 0.85rem 1.5rem;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+  border-top: 2px solid var(--color-primary);
+  animation: slideUp 0.18s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.bulk-bar__info {
+  font-size: 0.9rem; white-space: nowrap;
+}
+.bulk-bar__info strong {
+  font-size: 1.1rem; color: #fff;
+}
+.bulk-bar__acciones {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; flex: 1;
+}
+.bulk-bar__acciones .btn {
+  background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25);
+  color: #e2e8f0 !important;
+}
+.bulk-bar__acciones .btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+.bulk-bar__cerrar {
+  background: none; border: none; cursor: pointer;
+  color: #94a3b8; font-size: 1.1rem; padding: 0.25rem 0.5rem;
+  margin-left: auto; flex-shrink: 0;
+  transition: color 0.14s;
+}
+.bulk-bar__cerrar:hover { color: #fff; }
+
+/* Celda combinada foto+nombre+email */
+.admin-prof-celda {
+  display: flex; align-items: center; gap: 0.6rem; min-width: 0;
+}
+.admin-prof-celda > div {
+  display: flex; flex-direction: column; gap: 0.1rem; min-width: 0;
+}
+.admin-prof-nombre {
+  font-weight: 600; color: var(--color-primary);
+  text-decoration: none; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.admin-prof-nombre:hover { text-decoration: underline; }
+.admin-prof-email {
+  font-size: 0.78rem; color: var(--color-text-light);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Foto / avatar mini en tabla de profesionales */
+.admin-prof-mini-foto {
+  width: 34px; height: 34px; border-radius: 50%;
+  object-fit: cover; border: 1px solid var(--color-border);
+  display: block; flex-shrink: 0;
+}
+.admin-prof-mini-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff; font-size: 0.72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* Variante secundaria para botones admin (outline) */
+.btn-secundario {
+  background: #fff; color: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn-secundario:hover { background: var(--color-bg); border-color: #c8b8be; }
+
+/* Botón solo-ícono en acciones de tabla */
+.btn-icon {
+  padding: 0; width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.btn-icon svg { width: 17px; height: 17px; stroke: currentColor; }
+
+/* Checkbox en tabla */
+.admin-tabla input[type="checkbox"] {
+  width: 15px; height: 15px; cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+/* Fila clicable en tabla de profesionales */
+.admin-tabla tbody tr.fila-seleccionable { cursor: pointer; }
+.admin-tabla tbody tr.fila-seleccionable:has(.sel-prof:checked) td {
+  background: #fef2f2;
+}
+
+/* Icono en tabla categorías */
+.icono-tabla-preview {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: var(--color-bg); border: 1px solid var(--color-border);
+}
+.icono-tabla-preview svg { width: 20px; height: 20px; color: var(--color-primary); }
+
+/* ----------------------------------------------------------------
+   Selector visual de ícono (categorías)
+   ---------------------------------------------------------------- */
+.icono-picker-wrap {
+  position: relative; /* necesario para que el panel se posicione bajo el botón */
+}
+.icono-picker-btn {
+  display: flex; align-items: center; gap: 0.5rem;
+  width: 100%; padding: 0.42rem 0.7rem;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  background: var(--color-bg); color: var(--color-text);
+  font-size: 0.875rem; font-family: var(--font-base);
+  cursor: pointer; text-align: left;
+  transition: border-color 0.14s;
+}
+.icono-picker-btn:hover, .icono-picker-btn:focus {
+  border-color: var(--color-primary); outline: none;
+}
+.icono-picker-preview {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; flex-shrink: 0;
+}
+.icono-picker-preview svg { width: 18px; height: 18px; color: var(--color-primary); }
+.icono-picker-name { flex: 1; font-size: 0.82rem; color: var(--color-text-light); }
+.icono-picker-arrow { width: 14px; height: 14px; flex-shrink: 0; color: var(--color-text-light); }
+
+.icono-picker-panel {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-md);
+  z-index: 300; padding: 0.6rem;
+  min-width: 280px; max-width: 380px;
+}
+.icono-picker-buscar {
+  width: 100%; padding: 0.4rem 0.65rem;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  font-size: 0.85rem; font-family: var(--font-base);
+  background: var(--color-bg); color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+.icono-picker-buscar:focus { outline: none; border-color: var(--color-primary); }
+
+.icono-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 4px;
+  max-height: 260px; overflow-y: auto;
+}
+.icono-item {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 3px; padding: 6px 4px;
+  border: 1px solid transparent; border-radius: var(--radius-sm);
+  background: none; cursor: pointer;
+  font-size: 0.58rem; color: var(--color-text-light);
+  transition: background 0.12s, border-color 0.12s;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  max-width: 100%;
+}
+.icono-item svg { width: 22px; height: 22px; color: var(--color-text); }
+.icono-item span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.icono-item:hover { background: var(--color-primary-light); border-color: var(--color-border); }
+.icono-item--activo {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.icono-item--activo svg { color: var(--color-primary); }
+
+/* ----------------------------------------------------------------
+   Botón Apariencia en nav (multicolor)
+   ---------------------------------------------------------------- */
+.admin-nav__link--apariencia {
+  background: linear-gradient(135deg, #C41E3A 0%, #E8841A 50%, #4A90C4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+.admin-nav__link--apariencia svg { color: #E8841A; }
+.admin-nav__link--apariencia:hover { opacity: .8; }
+.admin-nav__link--apariencia-activo {
+  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid #E8841A;
+}
+
+/* ----------------------------------------------------------------
+   Editor de apariencia
+   ---------------------------------------------------------------- */
+.apariencia-seccion-titulo {
+  font-size: 1rem; font-weight: 700; margin-bottom: 1.1rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);
+}
+.apariencia-tipos {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1.25rem;
+}
+.apariencia-tipo-opt {
+  flex: 1; min-width: 150px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 14px 16px; border-radius: var(--radius-md);
+  border: 2px solid var(--color-border); background: #fff;
+  transition: border-color 0.15s, background 0.15s;
+}
+.apariencia-tipo-opt input[type="radio"] { display: none; }
+.apariencia-tipo-opt strong { font-size: 0.9rem; color: var(--color-text); }
+.apariencia-tipo-opt small  { font-size: 0.78rem; color: var(--color-text-light); }
+.apariencia-tipo-opt:hover  { border-color: var(--color-primary-light); background: var(--color-primary-light); }
+.apariencia-tipo-opt--activo {
+  border-color: var(--color-primary); background: var(--color-primary-light);
+}
+.apariencia-tipo-opt--activo strong { color: var(--color-primary); }
+
+.apariencia-campo {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+.apariencia-campo .form-label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; }
+.apariencia-campo .form-ayuda { font-size: 0.8rem; color: var(--color-text-light); margin-top: 0.4rem; }
+
+.apariencia-slider {
+  width: 100%; max-width: 400px; accent-color: var(--color-primary);
+  height: 6px; cursor: pointer;
+}
+
+/* Vista previa del hero */
+.apariencia-preview {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius-md); height: 220px;
+  background: #12060a; background-size: cover; background-position: center;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--color-border);
+}
+.apariencia-preview__overlay {
+  position: absolute; inset: 0; z-index: 0; transition: background 0.2s;
+}
+.apariencia-preview__contenido {
+  position: relative; z-index: 1; text-align: center;
+  padding: 1rem; color: #fff;
+}
+.apariencia-preview__titulo {
+  font-size: 1.3rem; font-weight: 800; margin-bottom: 0.4rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+.apariencia-preview__subtitulo {
+  font-size: 0.92rem; opacity: .85; margin-bottom: 1rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,.4);
+}
+.apariencia-preview__buscador {
+  display: inline-flex; gap: 8px; align-items: center;
+  background: rgba(255,255,255,.15); backdrop-filter: blur(4px);
+  border-radius: 999px; padding: 8px 12px 8px 16px; font-size: 0.85rem;
+}
+.apariencia-preview__buscador button {
+  background: var(--color-accent); color: #fff; border: none;
+  border-radius: 999px; padding: 5px 14px; font-weight: 700; font-size: 0.82rem; cursor: default;
+}
+.apariencia-preview--cta { height: 160px; }
+
+/* Botón y separador de upload de archivo */
+.apariencia-upload-sep {
+  display: flex; align-items: center; gap: 8px;
+  margin: 1rem 0 0.75rem; color: var(--color-text-xlight); font-size: 0.82rem;
+}
+.apariencia-upload-sep::before,
+.apariencia-upload-sep::after {
+  content: ''; flex: 1; height: 1px; background: var(--color-border);
+}
+.apariencia-upload-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer; padding: 8px 16px; border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border); background: #fff;
+  font-size: 0.88rem; font-weight: 600; color: var(--color-text);
+  transition: border-color 0.15s, background 0.15s;
+}
+.apariencia-upload-btn:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
+.apariencia-upload-btn svg { width: 16px; height: 16px; color: var(--color-primary); }
+.apariencia-file-input { display: none; }
+.apariencia-pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 600px) { .apariencia-pos-grid { grid-template-columns: 1fr; } }
