@@ -19,6 +19,14 @@ includes/config.local.php
 # Backups de base de datos - NO versionar
 backups/
 
-# Fotos de perfil subidas por usuarios - NO versionar; .htaccess sí se versiona
+# Archivos subidos por usuarios - NO versionar; .htaccess sí se versiona
 uploads/fotos/*
 !uploads/fotos/.htaccess
+uploads/dni/*
+!uploads/dni/.htaccess
+uploads/hero/*
+!uploads/hero/.htaccess
+
+# Carpetas de trabajo temporales de documentación
+"DOCUMENTACION SSD PROYECTO DE CARRERA/tp12_unpacked/"
+"DOCUMENTACION SSD PROYECTO DE CARRERA/tp12_fix2/"

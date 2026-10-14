@@ -1,0 +1,14 @@
+# uploads/fotos/.htaccess
+# Bloquear ejecución de scripts — solo imágenes estáticas
+
+Options -Indexes -ExecCGI
+
+# mod_php (apache2handler): deshabilitar el motor PHP en este directorio
+php_flag engine off
+
+RemoveHandler .php .php3 .php4 .php5 .php7 .php8 .phtml .cgi .pl .py
+RemoveType   .php .php3 .php4 .php5 .php7 .php8 .phtml
+
+<FilesMatch "(?i)\.(ph(p[2-8]?|tml)|cgi|pl|py|asp|sh)$">
+    Require all denied
+</FilesMatch>
