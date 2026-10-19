@@ -9,7 +9,7 @@
 $host = "127.0.0.1";
 $puerto = "3306";
 $usuario = "root";
-$password = "45169210";
+$password = "";
 $base_de_datos = "oficiored";
 
 // 2. Crear la conexión usando la extensión MySQLi (Orientado a Objetos)

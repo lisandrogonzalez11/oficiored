@@ -87,5 +87,5 @@ try {
     $pdo->exec("SET time_zone = '-03:00'");
 } catch (PDOException $e) {
     error_log('Error de conexión BD: ' . $e->getMessage());
-    die('Error de conexión. Intentá más tarde.');
+    die('Error de conexión: ' . $e->getMessage());
 }
